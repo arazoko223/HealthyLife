@@ -30,9 +30,12 @@ class DashAdmin extends BaseController
 			'total_saran' => $this->request->getPost('total_saran'),
 			'foto' => $this->request->getPost('foto'),
         );
+
+        $file = $this->request->getFile('foto');
+        // var_dump($file);
+        $file->move(WRITEPATH . '../public/assets/images/');
         $model->saveMakanan($data);
         return redirect()->to('/dash');
-	
     }
 
     public function edit($id)
@@ -45,7 +48,7 @@ class DashAdmin extends BaseController
     public function update( )
     {
         $model = new Dashboard_model();
-        $id = $this->request->getPost('id_makanan');
+        $id = $this->request->getPost('id');
         $data = array(
             'nama'  => $this->request->getPost('nama'),
             'berat' => $this->request->getPost('berat'),
@@ -54,6 +57,7 @@ class DashAdmin extends BaseController
 			'total_saran' => $this->request->getPost('total_saran'),
 			'foto' => $this->request->getPost('foto'),
         );
+     
         $model->updateMakanan($data, $id);
         return redirect()->to('/dash');
     }

@@ -11,7 +11,7 @@ class Dashboard_model extends Model
             return $this->findAll();
         }else{
             return $this->getWhere(['id_makanan' => $id]);
-        }   
+        }
     }
     public function saveMakanan($data)
     {
@@ -29,5 +29,5 @@ class Dashboard_model extends Model
     {
         $query = $this->db->table($this->table)->delete(array('id_makanan' => $id));
         return $query;
-    } 
+    }
 }

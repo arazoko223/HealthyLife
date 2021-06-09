@@ -22,18 +22,17 @@ class DashAdmin extends BaseController
     public function save()
     {
         $model = new Dashboard_model();
+        $upload = $this->request->getFile('foto');
+        $upload->move(WRITEPATH . '../public/assets/images/');
+        $name = $upload->getName();
         $data = array(
             'nama'  => $this->request->getPost('nama'),
             'berat' => $this->request->getPost('berat'),
 			'lemak' => $this->request->getPost('lemak'),
 			'kalori' => $this->request->getPost('kalori'),
 			'total_saran' => $this->request->getPost('total_saran'),
-			'foto' => $this->request->getPost('foto'),
+			'foto' => $name,
         );
-
-        $file = $this->request->getFile('foto');
-        // var_dump($file);
-        $file->move(WRITEPATH . '../public/assets/images/');
         $model->saveMakanan($data);
         return redirect()->to('/dash');
     }
